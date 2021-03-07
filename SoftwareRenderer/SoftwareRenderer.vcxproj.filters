@@ -30,6 +30,9 @@
     <ClInclude Include="Framework\WinApp.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Framework\Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

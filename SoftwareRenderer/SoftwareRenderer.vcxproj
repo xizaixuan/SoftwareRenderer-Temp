@@ -143,12 +143,14 @@
     <ClInclude Include="Framework\Engine.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
     <ClInclude Include="Framework\WinApp.h" />
+    <ClInclude Include="RenderContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp" />
     <ClCompile Include="Framework\Main.cpp" />
     <ClCompile Include="Framework\RenderDevice.cpp" />
     <ClCompile Include="Framework\WinApp.cpp" />
+    <ClCompile Include="RenderContext.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

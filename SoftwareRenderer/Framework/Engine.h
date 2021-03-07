@@ -27,9 +27,6 @@ public:
 	/// \brief 更新
 	void Update(float dt);
 
-	/// \brief 画直线
-	void DrawLine(int x0, int y0, int x1, int y1);
-
 	/// \brief 场景绘制
 	void RenderScene();
 };
