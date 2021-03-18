@@ -19,6 +19,15 @@
     <Filter Include="Source Files\Framework">
       <UniqueIdentifier>{805a13f9-f17d-42b0-82f2-f3396869d6d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mathematics">
+      <UniqueIdentifier>{42555b39-fcfe-4dd8-9178-824002a92ab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{66046a72-2b5b-44c6-afdb-c1b7598946fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mathematics">
+      <UniqueIdentifier>{1f6a2231-140e-4ace-a98b-b6835920afce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Engine.h">
@@ -32,6 +41,18 @@
     </ClInclude>
     <ClInclude Include="RenderContext.h">
       <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathematics\Float4.h">
+      <Filter>Header Files\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathematics\Float3.h">
+      <Filter>Header Files\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathematics\Float2.h">
+      <Filter>Header Files\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Singleton.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +70,15 @@
     </ClCompile>
     <ClCompile Include="RenderContext.cpp">
       <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathematics\Float2.cpp">
+      <Filter>Source Files\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathematics\Float3.cpp">
+      <Filter>Source Files\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathematics\Float4.cpp">
+      <Filter>Source Files\Mathematics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

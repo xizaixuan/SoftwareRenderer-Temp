@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -143,13 +143,20 @@
     <ClInclude Include="Framework\Engine.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
     <ClInclude Include="Framework\WinApp.h" />
+    <ClInclude Include="Mathematics\Float2.h" />
+    <ClInclude Include="Mathematics\Float3.h" />
+    <ClInclude Include="Mathematics\Float4.h" />
     <ClInclude Include="RenderContext.h" />
+    <ClInclude Include="Utility\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp" />
     <ClCompile Include="Framework\Main.cpp" />
     <ClCompile Include="Framework\RenderDevice.cpp" />
     <ClCompile Include="Framework\WinApp.cpp" />
+    <ClCompile Include="Mathematics\Float2.cpp" />
+    <ClCompile Include="Mathematics\Float3.cpp" />
+    <ClCompile Include="Mathematics\Float4.cpp" />
     <ClCompile Include="RenderContext.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

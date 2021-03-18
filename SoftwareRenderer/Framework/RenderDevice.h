@@ -41,25 +41,25 @@ public:
 
 private:
 	///	窗口宽度
-	DWORD	mWindowWidth;
+	DWORD	m_WindowWidth;
 
 	///	窗口高度
-	DWORD	mWindowHeight;
+	DWORD	m_WindowHeight;
 
 	///	窗口句柄
-	HWND	mHWND;
+	HWND	m_HWND;
 
 	/// 实例工厂
-	ID2D1Factory*			mFactory;
+	ID2D1Factory*			m_Factory;
 
 	/// 渲染目标
-	ID2D1HwndRenderTarget*	mRenderTarget;
+	ID2D1HwndRenderTarget*	m_RenderTarget;
 
 	/// 位图
-	ID2D1Bitmap*			mBitmap;
+	ID2D1Bitmap*			m_Bitmap;
 
 	/// 渲染数据
-	DWORD*					mDataBuffer;
+	DWORD*					m_DataBuffer;
 };
 
 #endif
