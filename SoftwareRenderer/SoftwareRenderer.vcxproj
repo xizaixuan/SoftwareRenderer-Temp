@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -141,23 +141,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Engine.h" />
+    <ClInclude Include="Framework\RenderContext.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
     <ClInclude Include="Framework\WinApp.h" />
     <ClInclude Include="Mathematics\Float2.h" />
     <ClInclude Include="Mathematics\Float3.h" />
     <ClInclude Include="Mathematics\Float4.h" />
-    <ClInclude Include="RenderContext.h" />
+    <ClInclude Include="Mathematics\MathUtil.h" />
+    <ClInclude Include="Mathematics\Matrix.h" />
     <ClInclude Include="Utility\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp" />
     <ClCompile Include="Framework\Main.cpp" />
+    <ClCompile Include="Framework\RenderContext.cpp" />
     <ClCompile Include="Framework\RenderDevice.cpp" />
     <ClCompile Include="Framework\WinApp.cpp" />
     <ClCompile Include="Mathematics\Float2.cpp" />
     <ClCompile Include="Mathematics\Float3.cpp" />
     <ClCompile Include="Mathematics\Float4.cpp" />
-    <ClCompile Include="RenderContext.cpp" />
+    <ClCompile Include="Mathematics\MathUtil.cpp" />
+    <ClCompile Include="Mathematics\Matrix.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

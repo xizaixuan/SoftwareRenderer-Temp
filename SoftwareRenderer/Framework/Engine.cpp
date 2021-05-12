@@ -15,9 +15,9 @@ Engine::~Engine()
 
 void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 {
-	WinApp::getSingletonPtr()->Create(hInstance, nCmdShow, width, height, "Render PipeLine");
+	WinApp::GetSingletonPtr()->Create(hInstance, nCmdShow, width, height, "Render PipeLine");
 
-	RenderDevice::getSingletonPtr()->InitRenderDevice(WinApp::getSingletonPtr()->GetHwnd(), width, height);
+	RenderDevice::GetSingletonPtr()->InitRenderDevice(WinApp::GetSingletonPtr()->GetHwnd(), width, height);
 }
 
 void Engine::Destroy()
@@ -27,13 +27,13 @@ void Engine::Destroy()
 
 void Engine::Update(float dt)
 {
-	RenderDevice::getSingletonPtr()->RenderBegin();
+	RenderDevice::GetSingletonPtr()->RenderBegin();
 
 	RenderScene();
 
-	RenderDevice::getSingletonPtr()->RenderBuffer();
+	RenderDevice::GetSingletonPtr()->RenderBuffer();
 
-	RenderDevice::getSingletonPtr()->RenderEnd();
+	RenderDevice::GetSingletonPtr()->RenderEnd();
 }
 
 

@@ -16,7 +16,7 @@ class Singleton
 {
 public:
 	/// brief 获取单例指针
-	static T* getSingletonPtr()
+	static T* GetSingletonPtr()
 	{
 		static T m_Singleton;
 		return &m_Singleton;
