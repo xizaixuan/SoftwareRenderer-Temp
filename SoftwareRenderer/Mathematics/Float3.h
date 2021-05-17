@@ -40,6 +40,10 @@ public:
 	float x;
 	float y;
 	float z;
+
+	static Float3 Up;
+	static Float3 Forward;
+	static Float3 Right;
 };
 
 #endif

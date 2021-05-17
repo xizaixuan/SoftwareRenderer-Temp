@@ -46,3 +46,7 @@ float Float3::operator *(const Float3& a) const
 {
 	return x*a.x + y*a.y + z*a.z;
 }
+
+static Float3 Up = Float3(0, 1, 0);
+static Float3 Forward = Float3(0, 0, 1);
+static Float3 Right = Float3(1, 0, 0);

@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Framework\Engine.h" />
     <ClInclude Include="Framework\RenderContext.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Utility\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Framework\Engine.cpp" />
     <ClCompile Include="Framework\Main.cpp" />
     <ClCompile Include="Framework\RenderContext.cpp" />
