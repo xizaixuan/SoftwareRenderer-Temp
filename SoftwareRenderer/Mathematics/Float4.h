@@ -9,6 +9,8 @@
 
 #define  float4 Float4
 
+class Matrix;
+
 class Float4
 {
 public:
@@ -38,6 +40,9 @@ public:
 
 	/// \brief 重载二元"*"运算符 与向量
 	float operator *(const Float4& a) const;
+
+	/// \brief 重载二元"*"运算符 与矩阵
+	float4 operator *(const Matrix& a) const;
 
 public:
 	float x;

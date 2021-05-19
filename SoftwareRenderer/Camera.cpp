@@ -7,7 +7,7 @@ void Camera::BuildViewMatrix()
 	m_Right = MathUtil::Normalize(MathUtil::Cross(Float3::Up, m_Forward));
 	m_Up = MathUtil::Normalize(MathUtil::Cross(m_Forward, m_Right));
 
-	m_ViewMatrix.Set(
+	m_ViewMatrix = Matrix(
 		m_Right.x,			m_Up.x,			m_Forward.x,	0,
 		m_Right.y,			m_Up.y,			m_Forward.y,	0,
 		m_Right.z,			m_Up.z,			m_Forward.z,	0,

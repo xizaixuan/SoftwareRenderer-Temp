@@ -13,26 +13,22 @@ class Matrix
 {
 public:
 	/// \brief 默认构造函数
-	Matrix();
+	Matrix(void);
 
 	/// \brief 带参数构造函数
+	Matrix(float4 c0, float4 c1, float4 c2, float4 c3);
+
 	Matrix(
 		float m00, float m01, float m02, float m03,
 		float m10, float m11, float m12, float m13,
 		float m20, float m21, float m22, float m23,
 		float m30, float m31, float m32, float m33);
 
-	/// \brief 带参数构造函数
-	Matrix(float4 vector0, float4 vector1, float4 vector2, float4 vector3);
-
 	/// \brief 析构函数
 	~Matrix(void);
 
 	/// \brief 重载赋值运算符,并返回引用，以实现左值
 	Matrix& operator =(const Matrix& a);
-
-	/// \brief 重载二元"+"运算符
-	Matrix operator +(const Matrix& a) const;
 
 	/// \brief 重载二元"*"运算符
 	Matrix operator *(const Matrix& a) const;
@@ -41,18 +37,17 @@ public:
 	/// \brief 置为单位矩阵
 	void Identity();
 
-	/// \brief 初始化
 	void Set(
 		float m00, float m01, float m02, float m03,
 		float m10, float m11, float m12, float m13,
 		float m20, float m21, float m22, float m23,
 		float m30, float m31, float m32, float m33);
 
-	/// \brief 初始化
-	void Set(float4 vector0, float4 vector1, float4 vector2, float4 vector3);
-
 public:
-	float m[4][4];
+	float4 c0;
+	float4 c1;
+	float4 c2;
+	float4 c3;
 };
 
 #endif

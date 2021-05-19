@@ -1,28 +1,33 @@
 #include "Matrix.h"
 #include <memory.h>
 
-Matrix::Matrix()
+Matrix::Matrix(void)
+	: c0(0.0f, 0.0f, 0.0f, 0.0f)
+	, c1(0.0f, 0.0f, 0.0f, 0.0f)
+	, c2(0.0f, 0.0f, 0.0f, 0.0f)
+	, c3(0.0f, 0.0f, 0.0f, 0.0f)
 {
 }
+
+Matrix::Matrix(float4 c0, float4 c1, float4 c2, float4 c3)
+	: c0(c0)
+	, c1(c1)
+	, c2(c2)
+	, c3(c3)
+{
+}
+
 
 Matrix::Matrix(
 	float m00, float m01, float m02, float m03,
-	float m10, float m11, float m12, float m13,
-	float m20, float m21, float m22, float m23,
+	float m10, float m11, float m12, float m13, 
+	float m20, float m21, float m22, float m23, 
 	float m30, float m31, float m32, float m33)
+	: c0(m00, m10, m20, m30)
+	, c1(m01, m11, m21, m31)
+	, c2(m02, m12, m22, m32)
+	, c3(m03, m13, m23, m33)
 {
-	Set(m00, m01, m02, m03,
-		m10, m11, m12, m13,
-		m20, m21, m22, m23,
-		m30, m31, m32, m33);
-}
-
-Matrix::Matrix(float4 vector0, float4 vector1, float4 vector2, float4 vector3)
-{
-	Set(vector0.x, vector1.x, vector2.x, vector3.x,
-		vector0.y, vector1.y, vector2.y, vector3.y, 
-		vector0.z, vector1.z, vector2.z, vector3.z, 
-		vector0.w, vector1.w, vector2.w, vector3.w);
 }
 
 Matrix::~Matrix(void)
@@ -31,47 +36,21 @@ Matrix::~Matrix(void)
 
 Matrix& Matrix::operator =(const Matrix& a)
 {
-	memcpy((void *)(this), (void *)(&a), sizeof(Matrix));
+	memcpy((void*)(this), (void*)(&a), sizeof(Matrix));
 
 	return *this;
 }
 
-Matrix Matrix::operator +(const Matrix& a) const
-{
-	Matrix result;
-	for (int row=0; row<4; row++)
-	{
-		for (int col=0; col<4; col++)
-		{
-			result.m[row][col] = m[row][col] + a.m[row][col];
-		}
-	}
-	return result;
-}
-
 Matrix Matrix::operator *(const Matrix& a) const
 {
-	Matrix result;
-	for (int row=0; row<4; row++)
-	{
-		for (int col=0; col<4; col++)
-		{
-			for (int index=0; index<4; index++)
-			{
-				result.m[row][col] += m[row][index] * a.m[index][col];
-			}
-		}
-	} 
-	return result;
+	Matrix mat = (*this);
+	return Matrix(a.c0 * mat, a.c1 * mat, a.c2 * mat, a.c3 * mat);
 }
 
 void Matrix::Identity()
 {
-	m[0][0] = m[1][1] = m[2][2] = m[3][3] = 1.0f;
-	m[0][1] = m[0][2] = m[0][3] = 0.0f;
-	m[1][0] = m[1][2] = m[1][3] = 0.0f;
-	m[2][0] = m[2][1] = m[2][3] = 0.0f;
-	m[3][0] = m[3][1] = m[3][2] = 0.0f;
+	c0 = c1 = c2 = c3 = Float4(0.0f, 0.0f, 0.0f, 0.0f);
+	c0.x = c1.y = c2.z = c3.w = 1.0f;
 }
 
 void Matrix::Set(
@@ -80,16 +59,8 @@ void Matrix::Set(
 	float m20, float m21, float m22, float m23,
 	float m30, float m31, float m32, float m33)
 {
-	m[0][0] = m00;	m[0][1] = m01;	m[0][2] = m02;	m[0][3] = m03;
-	m[1][0] = m10;	m[1][1] = m11;	m[1][2] = m12;	m[1][3] = m13;
-	m[2][0] = m20;	m[2][1] = m21;	m[2][2] = m22;	m[2][3] = m23;
-	m[3][0] = m30;	m[3][1] = m31;	m[3][2] = m32;	m[3][3] = m33;
-}
-
-void Matrix::Set(float4 vector0, float4 vector1, float4 vector2, float4 vector3)
-{
-	Set(vector0.x, vector1.x, vector2.x, vector3.x,
-		vector0.y, vector1.y, vector2.y, vector3.y,
-		vector0.z, vector1.z, vector2.z, vector3.z,
-		vector0.w, vector1.w, vector2.w, vector3.w);
+	c0 = float4(m00, m10, m20, m30);
+	c1 = float4(m01, m11, m21, m31);
+	c2 = float4(m02, m12, m22, m32);
+	c3 = float4(m03, m13, m23, m33);
 }

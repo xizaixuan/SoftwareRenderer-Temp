@@ -25,7 +25,7 @@ float MathUtil::Length(const float4& v)
 	return sqrtf(v.x*v.x + v.y*v.y + v.z*v.z);
 }
 
-float2 MathUtil::Normalize(float2& v)
+float2 MathUtil::Normalize(float2 v)
 {
 	//计算模的长度
 	float length = Length(v);
@@ -42,7 +42,7 @@ float2 MathUtil::Normalize(float2& v)
 	return v;
 }
 
-float3 MathUtil::Normalize(float3& v)
+float3 MathUtil::Normalize(float3 v)
 {
 	//计算模的长度
 	float length = Length(v);
@@ -60,7 +60,7 @@ float3 MathUtil::Normalize(float3& v)
 	return v;
 }
 
-float4 MathUtil::Normalize(float4& v)
+float4 MathUtil::Normalize(float4 v)
 {
 	//计算模的长度
 	float length = Length(v);
@@ -103,34 +103,34 @@ Matrix MathUtil::Inverse(Matrix mat)
 	Matrix imat;
 
 	float det = (
-		mat.m[0][0] * (mat.m[1][1] * mat.m[2][2] - mat.m[1][2] * mat.m[2][1]) -
-		mat.m[0][1] * (mat.m[1][0] * mat.m[2][2] - mat.m[1][2] * mat.m[2][0]) +
-		mat.m[0][2] * (mat.m[1][0] * mat.m[2][1] - mat.m[1][1] * mat.m[2][0]));
+		mat.c0.x * (mat.c1.y * mat.c2.z - mat.c1.z * mat.c2.y) -
+		mat.c0.y * (mat.c1.x * mat.c2.z - mat.c1.z * mat.c2.x) +
+		mat.c0.z * (mat.c1.x * mat.c2.y - mat.c1.y * mat.c2.x));
 
 	// 检查除零
 	if (fabs(det) > MathUtil::EPSILON)
 	{
 		float det_inv = 1.0f / det;
 
-		imat.m[0][0] = det_inv * (mat.m[1][1] * mat.m[2][2] - mat.m[1][2] * mat.m[2][1]);
-		imat.m[0][1] =-det_inv * (mat.m[0][1] * mat.m[2][2] - mat.m[0][2] * mat.m[2][1]);
-		imat.m[0][2] = det_inv * (mat.m[0][1] * mat.m[1][2] - mat.m[0][2] * mat.m[1][1]);
-		imat.m[0][3] = 0.0f;
+		imat.c0.x = det_inv * (mat.c1.y * mat.c2.z - mat.c1.z * mat.c2.y);
+		imat.c0.y = -det_inv * (mat.c0.y * mat.c2.z - mat.c0.z * mat.c2.y);
+		imat.c0.z = det_inv * (mat.c0.y * mat.c1.z - mat.c0.z * mat.c1.y);
+		imat.c0.w = 0.0f;
 
-		imat.m[1][0] =-det_inv * (mat.m[1][0] * mat.m[2][2] - mat.m[1][2] * mat.m[2][0]);
-		imat.m[1][1] = det_inv * (mat.m[0][0] * mat.m[2][2] - mat.m[0][2] * mat.m[2][0]);
-		imat.m[1][2] =-det_inv * (mat.m[0][0] * mat.m[1][2] - mat.m[0][2] * mat.m[1][0]);
-		imat.m[1][3] = 0.0f;
+		imat.c1.x = -det_inv * (mat.c1.x * mat.c2.z - mat.c1.z * mat.c2.x);
+		imat.c1.y = det_inv * (mat.c0.x * mat.c2.z - mat.c0.z * mat.c2.x);
+		imat.c1.z = -det_inv * (mat.c0.x * mat.c1.z - mat.c0.z * mat.c1.x);
+		imat.c1.w = 0.0f;
 
-		imat.m[2][0] = det_inv * (mat.m[1][0] * mat.m[2][1] - mat.m[1][1] * mat.m[2][0]);
-		imat.m[2][1] =-det_inv * (mat.m[0][0] * mat.m[2][1] - mat.m[0][1] * mat.m[2][0]);
-		imat.m[2][2] = det_inv * (mat.m[0][0] * mat.m[1][1] - mat.m[0][1] * mat.m[1][0]);
-		imat.m[2][3] = 0.0f;
+		imat.c2.x = det_inv * (mat.c1.x * mat.c2.y - mat.c1.y * mat.c2.x);
+		imat.c2.y = -det_inv * (mat.c0.x * mat.c2.y - mat.c0.y * mat.c2.x);
+		imat.c2.z = det_inv * (mat.c0.x * mat.c1.y - mat.c0.y * mat.c1.x);
+		imat.c2.w = 0.0f;
 
-		imat.m[3][0] = -(mat.m[3][0] * mat.m[0][0] + mat.m[3][1] * mat.m[1][0] + mat.m[3][2] * mat.m[2][0]);
-		imat.m[3][1] = -(mat.m[3][0] * mat.m[0][1] + mat.m[3][1] * mat.m[1][1] + mat.m[3][2] * mat.m[2][1]);
-		imat.m[3][2] = -(mat.m[3][0] * mat.m[0][2] + mat.m[3][1] * mat.m[1][2] + mat.m[3][2] * mat.m[2][2]);
-		imat.m[3][3] = 1.0f;
+		imat.c3.x = -(mat.c3.x * mat.c0.x + mat.c3.y * mat.c1.x + mat.c3.z * mat.c2.x);
+		imat.c3.y = -(mat.c3.x * mat.c0.y + mat.c3.y * mat.c1.y + mat.c3.z * mat.c2.y);
+		imat.c3.z = -(mat.c3.x * mat.c0.z + mat.c3.y * mat.c1.z + mat.c3.z * mat.c2.z);
+		imat.c3.w = 1.0f;
 	}
 
 	return mat;

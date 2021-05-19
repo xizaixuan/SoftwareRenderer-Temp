@@ -1,4 +1,5 @@
 #include "Float4.h"
+#include "Matrix.h"
 
 Float4::Float4(float _x, float _y, float _z)
 	: x(_x)
@@ -55,4 +56,13 @@ Float4 Float4::operator *(float a) const
 float Float4::operator *(const Float4& a) const
 {
 	return( (x * a.x) + (y * a.y) + (z * a.z) );
+}
+
+float4 Float4::operator *(const Matrix& a) const
+{
+	return Float4(
+		x * a.c0.x + y * a.c0.y + z * a.c0.z + w * a.c0.w,
+		x * a.c1.x + y * a.c1.y + z * a.c1.z + w * a.c1.w,
+		x * a.c2.x + y * a.c2.y + z * a.c2.z + w * a.c2.w,
+		x * a.c3.x + y * a.c3.y + z * a.c3.z + w * a.c3.w);
 }

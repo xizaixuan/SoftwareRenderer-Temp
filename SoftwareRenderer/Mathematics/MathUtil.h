@@ -28,9 +28,9 @@ namespace MathUtil
 	float Length(const float4& v);
 
 	/// brief 单位化
-	float2 Normalize(float2& v);
-	float3 Normalize(float3& v);
-	float4 Normalize(float4& v);
+	float2 Normalize(float2 v);
+	float3 Normalize(float3 v);
+	float4 Normalize(float4 v);
 
 	/// brief 求两向量的叉积
 	float2 Cross(const float2& a, const float2& b);
