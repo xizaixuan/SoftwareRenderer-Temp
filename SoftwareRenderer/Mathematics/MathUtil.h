@@ -16,8 +16,8 @@
 
 namespace MathUtil
 {
-	const float EPSILON = std::numeric_limits<float>::epsilon();
-	const float PI = ((float)3.141592654f);
+	const float epsilon = std::numeric_limits<float>::epsilon();
+	const float pi = ((float)3.141592654f);
 
 	float AngelToRadian(float ang);
 	float RadianToAngel(float rads);

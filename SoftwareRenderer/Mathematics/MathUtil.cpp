@@ -2,12 +2,12 @@
 
 float MathUtil::AngelToRadian(float ang)
 {
-	return ((ang)*PI / 180.0f);
+	return ((ang)*pi / 180.0f);
 }
 
 float MathUtil::RadianToAngel(float rads)
 {
-	return ((rads)*180.0f / PI);
+	return ((rads)*180.0f / pi);
 }
 
 float MathUtil::Length(const float2& v)
@@ -31,7 +31,7 @@ float2 MathUtil::Normalize(float2 v)
 	float length = Length(v);
 
 	//¼ì²é³ýÁã
-	if (length > EPSILON)
+	if (length > epsilon)
 	{
 		float lengthInv = 1.0f / length;
 
@@ -48,7 +48,7 @@ float3 MathUtil::Normalize(float3 v)
 	float length = Length(v);
 
 	//¼ì²é³ýÁã
-	if (length > EPSILON)
+	if (length > epsilon)
 	{
 		float lengthInv = 1.0f / length;
 
@@ -66,7 +66,7 @@ float4 MathUtil::Normalize(float4 v)
 	float length = Length(v);
 
 	//¼ì²é³ýÁã
-	if (length > EPSILON)
+	if (length > epsilon)
 	{
 		float lengthInv = 1.0f / length;
 
@@ -95,7 +95,7 @@ float3 MathUtil::Cross(const float3& a, const float3& b)
 
 bool MathUtil::IsEqual(float a, float b)
 {
-	return (fabs(a - b) <= EPSILON);
+	return (fabs(a - b) <= epsilon);
 }
 
 Matrix MathUtil::Inverse(Matrix mat)
@@ -108,7 +108,7 @@ Matrix MathUtil::Inverse(Matrix mat)
 		mat.c0.z * (mat.c1.x * mat.c2.y - mat.c1.y * mat.c2.x));
 
 	// ¼ì²é³ýÁã
-	if (fabs(det) > MathUtil::EPSILON)
+	if (fabs(det) > MathUtil::epsilon)
 	{
 		float det_inv = 1.0f / det;
 
