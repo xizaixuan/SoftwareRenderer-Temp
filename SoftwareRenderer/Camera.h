@@ -17,6 +17,8 @@ public:
 
 	void BuildPerspectiveMatrix();
 
+	void BuildViewPortMatrix();
+
 private:
 	float3 m_Position;
 	float3 m_Target;
@@ -31,6 +33,7 @@ private:
 
 	Matrix m_ViewMatrix;
 	Matrix m_PerspectiveMatrix;
+	Matrix m_ViewPortMatrix;
 };
 
 #endif
