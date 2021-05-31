@@ -150,6 +150,7 @@
     <ClInclude Include="Mathematics\Float4.h" />
     <ClInclude Include="Mathematics\MathUtil.h" />
     <ClInclude Include="Mathematics\Matrix.h" />
+    <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Utility\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="Mathematics\Float4.cpp" />
     <ClCompile Include="Mathematics\MathUtil.cpp" />
     <ClCompile Include="Mathematics\Matrix.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

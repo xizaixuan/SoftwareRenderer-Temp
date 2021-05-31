@@ -135,3 +135,12 @@ Matrix MathUtil::Inverse(Matrix mat)
 
 	return mat;
 }
+
+float4 MathUtil::Homogenous(float4& value)
+{
+	value.x /= value.w;
+	value.y /= value.w;
+	value.z /= value.w;
+	value.w = 1.0f;
+	return value;
+}

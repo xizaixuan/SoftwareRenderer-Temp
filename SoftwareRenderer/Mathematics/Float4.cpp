@@ -1,5 +1,6 @@
 #include "Float4.h"
 #include "Matrix.h"
+#include "Float3.h"
 
 Float4::Float4(float _x, float _y, float _z)
 	: x(_x)
@@ -15,6 +16,15 @@ Float4::Float4(float _x, float _y, float _z, float _w)
 	, z(_z)
 	, w(_w)
 {}
+
+Float4::Float4(const Float3& value, float _w)
+	: x(value.x)
+	, y(value.y)
+	, z(value.z)
+	, w(_w)
+{
+
+}
 
 Float4::Float4(const Float4& a)
 	: x(a.x)

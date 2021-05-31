@@ -10,6 +10,7 @@
 #define  float4 Float4
 
 class Matrix;
+class Float3;
 
 class Float4
 {
@@ -19,6 +20,8 @@ public:
 
 	/// \brief 参数构造函数
 	Float4(float x, float y, float z, float w);
+
+	Float4(const Float3& value, float w);
 
 	/// \brief 复制构造函数
 	Float4(const Float4& a);

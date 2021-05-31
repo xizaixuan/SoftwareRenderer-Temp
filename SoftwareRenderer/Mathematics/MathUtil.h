@@ -40,6 +40,8 @@ namespace MathUtil
 	bool IsEqual(float a, float b);
 
 	Matrix Inverse(Matrix mat);
+
+	float4 Homogenous(float4& value);
 }
 
 #endif

@@ -19,6 +19,12 @@ public:
 
 	void BuildViewPortMatrix();
 
+	Matrix GetViewMatrix();
+
+	Matrix GetPerspectiveMatrix();
+
+	Matrix GetViewPortMatrix();
+
 private:
 	float3 m_Position;
 	float3 m_Target;

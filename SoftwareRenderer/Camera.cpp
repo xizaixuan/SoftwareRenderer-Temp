@@ -50,3 +50,18 @@ void Camera::BuildViewPortMatrix()
 		0.0f,		0.0f,		1.0f,	0.0f,
 		W * 0.5f,	H * 0.5f,	0.0f,	1.0f);
 }
+
+Matrix Camera::GetViewMatrix()
+{
+	return m_ViewMatrix;
+}
+
+Matrix Camera::GetPerspectiveMatrix()
+{
+	return m_PerspectiveMatrix;
+}
+
+Matrix Camera::GetViewPortMatrix()
+{
+	return m_ViewPortMatrix;
+}
