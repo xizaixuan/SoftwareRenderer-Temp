@@ -16,7 +16,7 @@ public:
 	Matrix(void);
 
 	/// \brief 带参数构造函数
-	Matrix(float4 c0, float4 c1, float4 c2, float4 c3);
+	Matrix(float4 r0, float4 r1, float4 r2, float4 r3);
 
 	Matrix(
 		float m00, float m01, float m02, float m03,
@@ -31,7 +31,7 @@ public:
 	Matrix& operator =(const Matrix& a);
 
 	/// \brief 重载二元"*"运算符
-	Matrix operator *(const Matrix& a) const;
+	Matrix operator *(const Matrix& mat) const;
 
 public:
 	/// \brief 置为单位矩阵
@@ -44,10 +44,10 @@ public:
 		float m30, float m31, float m32, float m33);
 
 public:
-	float4 c0;
-	float4 c1;
-	float4 c2;
-	float4 c3;
+	float4 r0;
+	float4 r1;
+	float4 r2;
+	float4 r3;
 };
 
 #endif

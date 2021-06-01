@@ -13,6 +13,8 @@
 class Camera
 {
 public:
+	Camera();
+
 	void BuildViewMatrix();
 
 	void BuildPerspectiveMatrix();
@@ -25,21 +27,21 @@ public:
 
 	Matrix GetViewPortMatrix();
 
-private:
-	float3 m_Position;
-	float3 m_Target;
-	float3 m_Forward;
-	float3 m_Up;
-	float3 m_Right;
+public:
+	float3 Position;
+	float3 Target;
+	float3 Forward;
+	float3 Up;
+	float3 Right;
 
-	float m_FieldOfView;
-	float m_NearPlane;
-	float m_FarPlane;
-	float m_Aspect;
+	float FieldOfView;
+	float NearPlane;
+	float FarPlane;
+	float Aspect;
 
-	Matrix m_ViewMatrix;
-	Matrix m_PerspectiveMatrix;
-	Matrix m_ViewPortMatrix;
+	Matrix ViewMatrix;
+	Matrix PerspectiveMatrix;
+	Matrix ViewPortMatrix;
 };
 
 #endif

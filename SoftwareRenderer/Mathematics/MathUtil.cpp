@@ -103,37 +103,37 @@ Matrix MathUtil::Inverse(Matrix mat)
 	Matrix imat;
 
 	float det = (
-		mat.c0.x * (mat.c1.y * mat.c2.z - mat.c1.z * mat.c2.y) -
-		mat.c0.y * (mat.c1.x * mat.c2.z - mat.c1.z * mat.c2.x) +
-		mat.c0.z * (mat.c1.x * mat.c2.y - mat.c1.y * mat.c2.x));
+		mat.r0.x * (mat.r1.y * mat.r2.z - mat.r1.z * mat.r2.y) -
+		mat.r0.y * (mat.r1.x * mat.r2.z - mat.r1.z * mat.r2.x) +
+		mat.r0.z * (mat.r1.x * mat.r2.y - mat.r1.y * mat.r2.x));
 
 	// ¼ì²é³ýÁã
 	if (fabs(det) > MathUtil::epsilon)
 	{
 		float det_inv = 1.0f / det;
 
-		imat.c0.x = det_inv * (mat.c1.y * mat.c2.z - mat.c1.z * mat.c2.y);
-		imat.c0.y = -det_inv * (mat.c0.y * mat.c2.z - mat.c0.z * mat.c2.y);
-		imat.c0.z = det_inv * (mat.c0.y * mat.c1.z - mat.c0.z * mat.c1.y);
-		imat.c0.w = 0.0f;
+		imat.r0.x = det_inv * (mat.r1.y * mat.r2.z - mat.r1.z * mat.r2.y);
+		imat.r0.y = -det_inv * (mat.r0.y * mat.r2.z - mat.r0.z * mat.r2.y);
+		imat.r0.z = det_inv * (mat.r0.y * mat.r1.z - mat.r0.z * mat.r1.y);
+		imat.r0.w = 0.0f;
 
-		imat.c1.x = -det_inv * (mat.c1.x * mat.c2.z - mat.c1.z * mat.c2.x);
-		imat.c1.y = det_inv * (mat.c0.x * mat.c2.z - mat.c0.z * mat.c2.x);
-		imat.c1.z = -det_inv * (mat.c0.x * mat.c1.z - mat.c0.z * mat.c1.x);
-		imat.c1.w = 0.0f;
+		imat.r1.x = -det_inv * (mat.r1.x * mat.r2.z - mat.r1.z * mat.r2.x);
+		imat.r1.y = det_inv * (mat.r0.x * mat.r2.z - mat.r0.z * mat.r2.x);
+		imat.r1.z = -det_inv * (mat.r0.x * mat.r1.z - mat.r0.z * mat.r1.x);
+		imat.r1.w = 0.0f;
 
-		imat.c2.x = det_inv * (mat.c1.x * mat.c2.y - mat.c1.y * mat.c2.x);
-		imat.c2.y = -det_inv * (mat.c0.x * mat.c2.y - mat.c0.y * mat.c2.x);
-		imat.c2.z = det_inv * (mat.c0.x * mat.c1.y - mat.c0.y * mat.c1.x);
-		imat.c2.w = 0.0f;
+		imat.r2.x = det_inv * (mat.r1.x * mat.r2.y - mat.r1.y * mat.r2.x);
+		imat.r2.y = -det_inv * (mat.r0.x * mat.r2.y - mat.r0.y * mat.r2.x);
+		imat.r2.z = det_inv * (mat.r0.x * mat.r1.y - mat.r0.y * mat.r1.x);
+		imat.r2.w = 0.0f;
 
-		imat.c3.x = -(mat.c3.x * mat.c0.x + mat.c3.y * mat.c1.x + mat.c3.z * mat.c2.x);
-		imat.c3.y = -(mat.c3.x * mat.c0.y + mat.c3.y * mat.c1.y + mat.c3.z * mat.c2.y);
-		imat.c3.z = -(mat.c3.x * mat.c0.z + mat.c3.y * mat.c1.z + mat.c3.z * mat.c2.z);
-		imat.c3.w = 1.0f;
+		imat.r3.x = -(mat.r3.x * imat.r0.x + mat.r3.y * imat.r1.x + mat.r3.z * imat.r2.x);
+		imat.r3.y = -(mat.r3.x * imat.r0.y + mat.r3.y * imat.r1.y + mat.r3.z * imat.r2.y);
+		imat.r3.z = -(mat.r3.x * imat.r0.z + mat.r3.y * imat.r1.z + mat.r3.z * imat.r2.z);
+		imat.r3.w = 1.0f;
 	}
 
-	return mat;
+	return imat;
 }
 
 float4 MathUtil::Homogenous(float4& value)
@@ -141,6 +141,6 @@ float4 MathUtil::Homogenous(float4& value)
 	value.x /= value.w;
 	value.y /= value.w;
 	value.z /= value.w;
-	value.w = 1.0f;
+	value.w = 1;
 	return value;
 }

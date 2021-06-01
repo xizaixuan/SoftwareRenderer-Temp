@@ -8,7 +8,7 @@ using namespace std;
 
 class Camera;
 
-class Pipeline
+namespace Pipeline
 {
 	void Execute(Camera* camera, vector<float3> vertices, vector<int> indices);
 };

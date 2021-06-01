@@ -5,6 +5,10 @@
 
 void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indices)
 {
+	camera->BuildViewMatrix();
+	camera->BuildPerspectiveMatrix();
+	camera->BuildViewPortMatrix();
+
 	auto viewMat = camera->GetViewMatrix();
 	auto projMat = camera->GetPerspectiveMatrix();
 	auto viewPortMat = camera->GetViewPortMatrix();
@@ -13,9 +17,9 @@ void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indi
 	int indexLength = indices.size();
 	for (int index = 0; index < indexLength; index += 3)
 	{
-		auto v0 = float4(vertices[index + 0], 1.0);
-		auto v1 = float4(vertices[index + 1], 1.0);
-		auto v2 = float4(vertices[index + 2], 1.0);
+		auto v0 = float4(vertices[indices[index + 0]], 1.0);
+		auto v1 = float4(vertices[indices[index + 1]], 1.0);
+		auto v2 = float4(vertices[indices[index + 2]], 1.0);
 
 		v0 = v0 * vp;
 		v1 = v1 * vp;

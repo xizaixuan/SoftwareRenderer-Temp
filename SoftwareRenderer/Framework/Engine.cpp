@@ -4,6 +4,12 @@
 #include <corecrt_math.h>
 #include <corecrt_math_defines.h>
 #include "RenderContext.h"
+#include <vector>
+#include "../Mathematics/Float3.h"
+#include "../Camera.h"
+#include "../Pipeline.h"
+
+using namespace std;
 
 Engine::Engine()
 {
@@ -18,6 +24,12 @@ void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 	WinApp::GetSingletonPtr()->Create(hInstance, nCmdShow, width, height, "Render PipeLine");
 
 	RenderDevice::GetSingletonPtr()->InitRenderDevice(WinApp::GetSingletonPtr()->GetHwnd(), width, height);
+
+	m_Camera = new Camera();
+	m_Camera->FieldOfView = 60.0f;
+	m_Camera->NearPlane = 0.1f;
+	m_Camera->FarPlane = 1000.0f;
+	m_Camera->Aspect = ((float)width) / height;
 }
 
 void Engine::Destroy()
@@ -39,22 +51,45 @@ void Engine::Update(float dt)
 
 void Engine::RenderScene()
 {
-	int w = 1920;
-	int h = 1080;
-	float cx = w * 0.5f - 0.5f;
-	float cy = h * 0.5f - 0.5f;
+	m_Camera->Position = float3(2, 3, 5);
+	m_Camera->Target = float3(0, 0, 0);
 
-	DWORD color = (255 << 24) + (255 << 16) + (255 << 8) + 255;
+	vector<float3> vertices{
+		float3(-1.0f, -1.0f, -1.0f),
+		float3(-1.0f,  1.0f, -1.0f),
+		float3(1.0f,  1.0f, -1.0f),
+		float3(1.0f, -1.0f, -1.0f),
+		float3(-1.0f, -1.0f,  1.0f),
+		float3(-1.0f,  1.0f,  1.0f),
+		float3(1.0f,  1.0f,  1.0f),
+		float3(1.0f, -1.0f,  1.0f)
+	};
 
-	for (int j = 0; j < 5; j++)
-	{
-		float r1 = fminf(w, h) * (j + 0.5f) * 0.085f;
-		float r2 = fminf(w, h) * (j + 1.5f) * 0.085f;
-		float t = j * M_PI / 64.0f;
-		for (int i = 1; i <= 64; i++, t += 2.0f * M_PI / 64)
-		{
-			float ct = cosf(t), st = sinf(t);
-			RenderContext::DrawLine(cx + r1 * ct, cy - r1 * st, cx + r2 * ct, cy - r2 * st, color);
-		}
-	}
+	vector<int> indices = {
+		// Front face.
+		0, 1, 2,
+		0, 2, 3,
+
+		// Back face.
+		4, 6, 5,
+		4, 7, 6,
+
+		// Left face.
+ 		4, 5, 1,
+ 		4, 1, 0,
+
+		// Right face.
+		3, 2, 6,
+		3, 6, 7,
+
+		// Top face.
+		1, 5, 6,
+		1, 6, 2,
+
+		// Bottom face.
+		4, 0, 3,
+		4, 3, 7,
+	};
+
+	Pipeline::Execute(m_Camera, vertices, indices);
 }

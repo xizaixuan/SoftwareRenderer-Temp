@@ -10,6 +10,8 @@
 #include <Windows.h>
 #include "..\Utility\Singleton.h"
 
+class Camera;
+
 class Engine : public Singleton<Engine>
 {
 	SINGLETON_DEFINE(Engine)
@@ -29,6 +31,9 @@ public:
 
 	/// \brief ≥°æ∞ªÊ÷∆
 	void RenderScene();
+
+private:
+	Camera* m_Camera;
 };
 
 

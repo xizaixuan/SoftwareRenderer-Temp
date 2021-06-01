@@ -71,8 +71,8 @@ float Float4::operator *(const Float4& a) const
 float4 Float4::operator *(const Matrix& a) const
 {
 	return Float4(
-		x * a.c0.x + y * a.c0.y + z * a.c0.z + w * a.c0.w,
-		x * a.c1.x + y * a.c1.y + z * a.c1.z + w * a.c1.w,
-		x * a.c2.x + y * a.c2.y + z * a.c2.z + w * a.c2.w,
-		x * a.c3.x + y * a.c3.y + z * a.c3.z + w * a.c3.w);
+		x * a.r0.x + y * a.r1.x + z * a.r2.x + w * a.r3.x,
+		x * a.r0.y + y * a.r1.y + z * a.r2.y + w * a.r3.y,
+		x * a.r0.z + y * a.r1.z + z * a.r2.z + w * a.r3.z,
+		x * a.r0.w + y * a.r1.w + z * a.r2.w + w * a.r3.w);
 }

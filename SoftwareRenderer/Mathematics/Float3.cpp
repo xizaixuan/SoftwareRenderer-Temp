@@ -50,3 +50,6 @@ float Float3::operator *(const Float3& a) const
 Float3 Float3::Up = Float3(0, 1, 0);
 Float3 Float3::Forward = Float3(0, 0, 1);
 Float3 Float3::Right = Float3(1, 0, 0);
+
+Float3 Float3::Zero = Float3(0, 0, 0);
+Float3 Float3::One = Float3(1, 1, 1);

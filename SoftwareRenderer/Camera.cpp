@@ -1,38 +1,57 @@
 #include "Camera.h"
 #include "Mathematics/MathUtil.h"
+#include "Mathematics/Float3.h"
+
+Camera::Camera()
+	: Position(Float3::Zero)
+	, Target(Float3::Zero)
+	, Forward(Float3::Zero)
+	, Up(Float3::Zero)
+	, Right(Float3::Zero)
+	, FieldOfView(0.0f)
+	, NearPlane(0.0f)
+	, FarPlane(0.0f)
+	, Aspect(0.0f)
+{
+	ViewMatrix.Identity();
+	PerspectiveMatrix.Identity();
+	ViewPortMatrix.Identity();
+}
 
 void Camera::BuildViewMatrix()
 {
-	m_Forward = MathUtil::Normalize((m_Target - m_Position));
-	m_Right = MathUtil::Normalize(MathUtil::Cross(Float3::Up, m_Forward));
-	m_Up = MathUtil::Normalize(MathUtil::Cross(m_Forward, m_Right));
+	Forward = MathUtil::Normalize((Target - Position));
+	Right = MathUtil::Normalize(MathUtil::Cross(Float3::Up, Forward));
+	Up = MathUtil::Normalize(MathUtil::Cross(Forward, Right));
 
-	auto transMat = Matrix(
-		0.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 0.0f,
-		-m_Position.x, -m_Position.y, -m_Position.z, 0.0f);
+	auto matT = Matrix(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		Position.x, Position.y, Position.z, 1.0f);
 
-	auto rotMat = Matrix(
-		m_Right.x,	m_Up.x,	m_Forward.x, 0.0f,
-		m_Right.y,	m_Up.y, m_Forward.y, 0.0f,
-		m_Right.z,	m_Up.z, m_Forward.z, 0.0f,
-		0.0f,		0.0f,	0.0f,		 0.0f);
+	auto matR = Matrix(
+		Right.x,	Right.y,	Right.z,	0.0f,
+		Up.x,		Up.y,		Up.z,		0.0f,
+		Forward.x,	Forward.y,	Forward.z,	0.0f,
+		0.0f,		0.0f,		0.0f,		1.0f);
 
-	m_ViewMatrix = transMat * rotMat;
+	Matrix invView = matR * matT;
+
+	ViewMatrix = MathUtil::Inverse(invView);
 }
 
 void Camera::BuildPerspectiveMatrix()
 {
-	auto N = m_NearPlane;
-	auto F = m_FarPlane;
+	auto N = NearPlane;
+	auto F = FarPlane;
 	auto a = (F + N) / (F - N);
 	auto b = (-2 * N * F) / (F - N);
 
-	auto W = 2 * N * tan(MathUtil::AngelToRadian(m_FieldOfView * 0.5f));
-	auto H = W / m_Aspect;
+	auto W = 2 * N * tan(MathUtil::AngelToRadian(FieldOfView * 0.5f));
+	auto H = W / Aspect;
 
-	m_PerspectiveMatrix.Set(
+	PerspectiveMatrix.Set(
 		2 * N / W,	0,			0,	0,
 		0,			2 * N / H,	0,  0,
 		0,			0,			a,	1,
@@ -41,27 +60,27 @@ void Camera::BuildPerspectiveMatrix()
 
 void Camera::BuildViewPortMatrix()
 {
-	float W = 1920.0f;
-	float H = 1080.0f;
+	float alpha = 0.5f * 1920.0f;
+	float beta = 0.5f * 1080.0f;
 
-	m_ViewPortMatrix.Set(
-		W * 0.5f,	0.0f,		0.0f,	0.0f,
-		0.0f,		H * 0.5f,	0.0f,	0.0f,
-		0.0f,		0.0f,		1.0f,	0.0f,
-		W * 0.5f,	H * 0.5f,	0.0f,	1.0f);
+	ViewPortMatrix.Set(
+		alpha, 0.0f, 0.0f,	0.0f,
+		0.0f,  beta, 0.0f,	0.0f,
+		0.0f,  0.0f, 1.0f,	0.0f,
+		alpha, beta, 0.0f,	1.0f);
 }
 
 Matrix Camera::GetViewMatrix()
 {
-	return m_ViewMatrix;
+	return ViewMatrix;
 }
 
 Matrix Camera::GetPerspectiveMatrix()
 {
-	return m_PerspectiveMatrix;
+	return PerspectiveMatrix;
 }
 
 Matrix Camera::GetViewPortMatrix()
 {
-	return m_ViewPortMatrix;
+	return ViewPortMatrix;
 }

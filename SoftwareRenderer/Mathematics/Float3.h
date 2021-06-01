@@ -44,6 +44,9 @@ public:
 	static Float3 Up;
 	static Float3 Forward;
 	static Float3 Right;
+
+	static Float3 Zero;
+	static Float3 One;
 };
 
 #endif

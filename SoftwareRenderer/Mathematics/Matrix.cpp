@@ -2,18 +2,18 @@
 #include <memory.h>
 
 Matrix::Matrix(void)
-	: c0(0.0f, 0.0f, 0.0f, 0.0f)
-	, c1(0.0f, 0.0f, 0.0f, 0.0f)
-	, c2(0.0f, 0.0f, 0.0f, 0.0f)
-	, c3(0.0f, 0.0f, 0.0f, 0.0f)
+	: r0(1.0f, 0.0f, 0.0f, 0.0f)
+	, r1(0.0f, 1.0f, 0.0f, 0.0f)
+	, r2(0.0f, 0.0f, 1.0f, 0.0f)
+	, r3(0.0f, 0.0f, 0.0f, 1.0f)
 {
 }
 
-Matrix::Matrix(float4 c0, float4 c1, float4 c2, float4 c3)
-	: c0(c0)
-	, c1(c1)
-	, c2(c2)
-	, c3(c3)
+Matrix::Matrix(float4 r0, float4 r1, float4 r2, float4 r3)
+	: r0(r0)
+	, r1(r1)
+	, r2(r2)
+	, r3(r3)
 {
 }
 
@@ -23,10 +23,10 @@ Matrix::Matrix(
 	float m10, float m11, float m12, float m13, 
 	float m20, float m21, float m22, float m23, 
 	float m30, float m31, float m32, float m33)
-	: c0(m00, m10, m20, m30)
-	, c1(m01, m11, m21, m31)
-	, c2(m02, m12, m22, m32)
-	, c3(m03, m13, m23, m33)
+	: r0(m00, m01, m02, m03)
+	, r1(m10, m11, m12, m13)
+	, r2(m20, m21, m22, m23)
+	, r3(m30, m31, m32, m33)
 {
 }
 
@@ -44,13 +44,13 @@ Matrix& Matrix::operator =(const Matrix& a)
 Matrix Matrix::operator *(const Matrix& a) const
 {
 	Matrix mat = (*this);
-	return Matrix(a.c0 * mat, a.c1 * mat, a.c2 * mat, a.c3 * mat);
+	return Matrix(mat.r0 * a, mat.r1 * a, mat.r2 * a, mat.r3 * a);
 }
 
 void Matrix::Identity()
 {
-	c0 = c1 = c2 = c3 = Float4(0.0f, 0.0f, 0.0f, 0.0f);
-	c0.x = c1.y = c2.z = c3.w = 1.0f;
+	r0 = r1 = r2 = r3 = Float4(0.0f, 0.0f, 0.0f, 0.0f);
+	r0.x = r1.y = r2.z = r3.w = 1.0f;
 }
 
 void Matrix::Set(
@@ -59,8 +59,8 @@ void Matrix::Set(
 	float m20, float m21, float m22, float m23,
 	float m30, float m31, float m32, float m33)
 {
-	c0 = float4(m00, m10, m20, m30);
-	c1 = float4(m01, m11, m21, m31);
-	c2 = float4(m02, m12, m22, m32);
-	c3 = float4(m03, m13, m23, m33);
+	r0 = float4(m00, m01, m02, m03);
+	r1 = float4(m10, m11, m12, m13);
+	r2 = float4(m20, m21, m22, m23);
+	r3 = float4(m30, m31, m32, m33);
 }
