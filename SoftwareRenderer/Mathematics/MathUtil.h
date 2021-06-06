@@ -42,6 +42,12 @@ namespace MathUtil
 	Matrix Inverse(Matrix mat);
 
 	float4 Homogenous(float4& value);
+
+	template<typename T>
+	static T Clamp(const T& x, const T& low, const T& high)
+	{
+		return x < low ? low : (x > high ? high : x);
+	}
 }
 
 #endif

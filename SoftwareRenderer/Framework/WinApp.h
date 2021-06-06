@@ -37,9 +37,6 @@ private:
 	/// \brief 初始化
 	bool	Init(HINSTANCE hInstance, int nCmdShow);
 
-	/// \brief 消息回调函数
-	static	LRESULT CALLBACK  WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 	///	窗口名称
 	LPCSTR	m_Caption;
 

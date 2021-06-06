@@ -41,6 +41,21 @@ HWND WinApp::GetHwnd()
 	return m_HWND;
 }
 
+LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+
+	case WM_MOUSEMOVE:
+		Engine::GetSingletonPtr()->OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		break;
+	}
+	return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
 WORD WinApp::RegisterClass(HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;
@@ -48,7 +63,7 @@ WORD WinApp::RegisterClass(HINSTANCE hInstance)
 	wcex.cbSize = sizeof(WNDCLASSEX); 
 
 	wcex.style			= CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc	= (WNDPROC)WinApp::WndProc;
+	wcex.lpfnWndProc	= WndProc;
 	wcex.cbClsExtra		= 0;
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
@@ -83,15 +98,4 @@ bool WinApp::Init(HINSTANCE hInstance, int nCmdShow)
 	ShowWindow(m_HWND, nCmdShow);
 
 	return true;
-}
-
-LRESULT CALLBACK  WinApp::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg) 
-	{
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	}
-	return DefWindowProc(hWnd, msg, wParam, lParam);
 }

@@ -9,6 +9,7 @@
 
 #include <Windows.h>
 #include "..\Utility\Singleton.h"
+#include "..\Mathematics\Float2.h"
 
 class Camera;
 
@@ -32,8 +33,16 @@ public:
 	/// \brief ≥°æ∞ªÊ÷∆
 	void RenderScene();
 
+	void OnMouseMove(WPARAM btnState, int x, int y);
+
 private:
 	Camera* m_Camera;
+
+	float m_Theta;
+	float m_Phi;
+	float m_Radius;
+
+	float2 m_LastMousePos;
 };
 
 
