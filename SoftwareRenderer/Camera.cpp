@@ -60,8 +60,8 @@ void Camera::BuildPerspectiveMatrix()
 
 void Camera::BuildViewPortMatrix()
 {
-	float alpha = 0.5f * 1920.0f;
-	float beta = 0.5f * 1080.0f;
+	float alpha = 0.5f * 1024.0f;
+	float beta = 0.5f * 768.0f;
 
 	ViewPortMatrix.Set(
 		alpha, 0.0f, 0.0f,	0.0f,

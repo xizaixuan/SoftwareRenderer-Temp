@@ -17,6 +17,8 @@
 namespace MathUtil
 {
 	const float epsilon = std::numeric_limits<float>::epsilon();
+	const float maxValue = FLT_MAX;
+	const float minValue = FLT_MIN;
 	const float pi = ((float)3.141592654f);
 
 	float AngelToRadian(float ang);
