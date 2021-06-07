@@ -38,6 +38,8 @@ public:
 	float NearPlane;
 	float FarPlane;
 	float Aspect;
+	float ViewPortWidth;
+	float viewPortHeight;
 
 	Matrix ViewMatrix;
 	Matrix PerspectiveMatrix;

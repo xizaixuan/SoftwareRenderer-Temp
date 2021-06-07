@@ -12,6 +12,8 @@ Camera::Camera()
 	, NearPlane(0.0f)
 	, FarPlane(0.0f)
 	, Aspect(0.0f)
+	, ViewPortWidth(0.0f)
+	, viewPortHeight(0.0f)
 {
 	ViewMatrix.Identity();
 	PerspectiveMatrix.Identity();
@@ -60,8 +62,8 @@ void Camera::BuildPerspectiveMatrix()
 
 void Camera::BuildViewPortMatrix()
 {
-	float alpha = 0.5f * 1024.0f;
-	float beta = 0.5f * 768.0f;
+	float alpha = 0.5f * ViewPortWidth;
+	float beta = 0.5f * viewPortHeight;
 
 	ViewPortMatrix.Set(
 		alpha, 0.0f, 0.0f,	0.0f,

@@ -36,6 +36,8 @@ void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 	m_Camera->NearPlane = 0.1f;
 	m_Camera->FarPlane = 1000.0f;
 	m_Camera->Aspect = ((float)width) / height;
+	m_Camera->ViewPortWidth = 1024.0f;
+	m_Camera->viewPortHeight = 768.0f;
 }
 
 void Engine::Destroy()
