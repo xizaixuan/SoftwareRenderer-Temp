@@ -44,6 +44,11 @@ void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indi
 
 void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2)
 {
+	auto edgeFunction = [](const float4& a, const float4& b, const float4& c)
+	{
+		return (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x);
+	};
+
 	auto boundMin = [](const float& a, const float& b, const float& c)
 	{
 		return min(min(a, b), min(a, c));
@@ -63,27 +68,16 @@ void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2)
 	{
 		for (int y = minY; y <= maxY; y++)
 		{
-			if (IsInTriangle(float2(v0.x, v0.y), float2(v1.x, v1.y), float2(v2.x, v2.y), float2(x + 0.5f, y + 0.5f)))
+			auto point = float4(x + 0.5f, y + 0.5f, 0.0, 1.0);
+			float w0 = edgeFunction(v1, v2, point);
+			float w1 = edgeFunction(v2, v0, point);
+			float w2 = edgeFunction(v0, v1, point);
+
+			if (w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
 				DWORD color = (255 << 24) + (255 << 16) + (255 << 8) + 255;
 				RenderDevice::GetSingletonPtr()->DrawPixel(x, y, color);
 			}
 		}
 	}
-}
-
-bool Pipeline::IsInTriangle(float2 v0, float2 v1, float2 v2, float2 point)
-{
-	auto pv0 = point - v0;
-	auto pv1 = point - v1;
-	auto pv2 = point - v2;
-	auto v01 = v0 - v1;
-	auto v12 = v1 - v2;
-	auto v20 = v2 - v0;
-
-	auto value0 = pv0.x * v01.y - pv0.y * v01.x;
-	auto value1 = pv1.x * v12.y - pv1.y * v12.x;
-	auto value2 = pv2.x * v20.y - pv2.y * v20.x;
-
-	return value0 >= 0 && value1 >= 0 && value2 >= 0;
 }
