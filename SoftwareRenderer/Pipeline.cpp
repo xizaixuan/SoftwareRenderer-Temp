@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indices)
+void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indices, vector<float3> colors)
 {
 	camera->BuildViewMatrix();
 	camera->BuildPerspectiveMatrix();
@@ -38,11 +38,15 @@ void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indi
 		auto v1 = vertexArray[indices[index + 1]];
 		auto v2 = vertexArray[indices[index + 2]];
 
-		Rasterize(v0, v1, v2);
+		auto color0 = colors[indices[index + 0]];
+		auto color1 = colors[indices[index + 1]];
+		auto color2 = colors[indices[index + 2]];
+
+		Rasterize(v0, v1, v2, color0, color1, color2);
 	}
 }
 
-void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2)
+void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2, float3 color0, float3 color1, float3 color2)
 {
 	auto edgeFunction = [](const float4& a, const float4& b, const float4& c)
 	{
@@ -58,6 +62,8 @@ void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2)
 	{
 		return max(max(a, b), max(a, c));
 	};
+
+	int area = edgeFunction(v0, v1, v2);
 
 	auto minX = std::lround(boundMin(v0.x, v1.x, v2.x));
 	auto maxX = std::lround(boundMax(v0.x, v1.x, v2.x));
@@ -75,7 +81,16 @@ void Pipeline::Rasterize(float4 v0, float4 v1, float4 v2)
 
 			if (w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
-				DWORD color = (255 << 24) + (255 << 16) + (255 << 8) + 255;
+				w0 /= area;
+				w1 /= area;
+				w2 /= area;
+
+				//////////////////////////////////////////////////////////////////////////
+				// color
+				float3 newColor = color0 * w0 + color1 * w1 + color2 * w2;
+
+				DWORD color = (255 << 24) + ((int)(newColor.x * 255) << 16) + ((int)(newColor.y * 255) << 8) + (int)(newColor.z * 255);
+
 				RenderDevice::GetSingletonPtr()->DrawPixel(x, y, color);
 			}
 		}

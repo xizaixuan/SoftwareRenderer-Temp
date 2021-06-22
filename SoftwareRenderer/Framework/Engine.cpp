@@ -77,6 +77,17 @@ void Engine::RenderScene()
 		float3(1.0f, -1.0f,  1.0f)
 	};
 
+	vector<float3> colors{
+	float3(1.0f, 1.0f, 1.0f),
+	float3(0.0f, 0.0f, 1.0f),
+	float3(1.0f, 0.0f, 0.0f),
+	float3(0.0f, 1.0f, 0.0f),
+	float3(1.0f, 1.0f, 0.0f),
+	float3(1.0f, 0.0f, 1.0f),
+	float3(0.0f, 1.0f, 1.0f),
+	float3(0.5f, 0.5f, 0.5f),
+	};
+
 	vector<int> indices = {
 		// Front face.
 		0, 1, 2,
@@ -103,7 +114,7 @@ void Engine::RenderScene()
 		4, 3, 7,
 	};
 
-	Pipeline::Execute(m_Camera, vertices, indices);
+	Pipeline::Execute(m_Camera, vertices, indices, colors);
 }
 
 void Engine::OnMouseMove(WPARAM btnState, int x, int y)

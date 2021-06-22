@@ -12,9 +12,9 @@ class Camera;
 
 namespace Pipeline
 {
-	void Execute(Camera* camera, vector<float3> vertices, vector<int> indices);
+	void Execute(Camera* camera, vector<float3> vertices, vector<int> indices, vector<float3> colors);
 
-	void Rasterize(float4 v0, float4 v1, float4 v2);
+	void Rasterize(float4 v0, float4 v1, float4 v2, float3 color0, float3 color1, float3 color2);
 };
 
 #endif
