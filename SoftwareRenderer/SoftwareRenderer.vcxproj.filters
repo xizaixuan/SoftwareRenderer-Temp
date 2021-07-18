@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Mathematics">
       <UniqueIdentifier>{1f6a2231-140e-4ace-a98b-b6835920afce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GLTF">
+      <UniqueIdentifier>{7dfc8645-0e62-4a3b-a9f0-759e70384feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLTF">
+      <UniqueIdentifier>{e706caca-d1c9-4ad6-8a6e-821814b78077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Engine.h">
@@ -66,6 +72,24 @@
     <ClInclude Include="Pipeline.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="GLTF\json.hpp">
+      <Filter>Header Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF\stb_image.h">
+      <Filter>Header Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF\stb_image_write.h">
+      <Filter>Header Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF\tiny_gltf.h">
+      <Filter>Header Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Mesh.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF\gltf-loader.h">
+      <Filter>Header Files\GLTF</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp">
@@ -103,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Pipeline.cpp">
       <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTF\gltf-loader.cpp">
+      <Filter>Source Files\GLTF</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

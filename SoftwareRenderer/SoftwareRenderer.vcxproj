@@ -142,9 +142,15 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Framework\Engine.h" />
+    <ClInclude Include="Framework\Mesh.h" />
     <ClInclude Include="Framework\RenderContext.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
     <ClInclude Include="Framework\WinApp.h" />
+    <ClInclude Include="GLTF\gltf-loader.h" />
+    <ClInclude Include="GLTF\json.hpp" />
+    <ClInclude Include="GLTF\stb_image.h" />
+    <ClInclude Include="GLTF\stb_image_write.h" />
+    <ClInclude Include="GLTF\tiny_gltf.h" />
     <ClInclude Include="Mathematics\Float2.h" />
     <ClInclude Include="Mathematics\Float3.h" />
     <ClInclude Include="Mathematics\Float4.h" />
@@ -160,6 +166,7 @@
     <ClCompile Include="Framework\RenderContext.cpp" />
     <ClCompile Include="Framework\RenderDevice.cpp" />
     <ClCompile Include="Framework\WinApp.cpp" />
+    <ClCompile Include="GLTF\gltf-loader.cpp" />
     <ClCompile Include="Mathematics\Float2.cpp" />
     <ClCompile Include="Mathematics\Float3.cpp" />
     <ClCompile Include="Mathematics\Float4.cpp" />

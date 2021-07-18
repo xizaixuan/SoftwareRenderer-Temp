@@ -10,6 +10,15 @@
 #include "../Pipeline.h"
 #include "../Mathematics/MathUtil.h"
 
+
+#define TINYGLTF_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define STBI_MSC_SECURE_CRT
+#include "../GLTF/tiny_gltf.h"
+#include "Mesh.h"
+#include "../GLTF/gltf-loader.h"
+
 using namespace std;
 
 Engine::Engine()
@@ -25,6 +34,8 @@ Engine::~Engine()
 {
 }
 
+std::vector<Mesh> meshes;
+
 void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 {
 	WinApp::GetSingletonPtr()->Create(hInstance, nCmdShow, width, height, "Render PipeLine");
@@ -38,6 +49,8 @@ void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 	m_Camera->Aspect = ((float)width) / height;
 	m_Camera->ViewPortWidth = 1024.0f;
 	m_Camera->viewPortHeight = 768.0f;
+
+	LoadModel();
 }
 
 void Engine::Destroy()
@@ -65,56 +78,11 @@ void Engine::RenderScene()
 
 	m_Camera->Position = float3(x, y, z);
 	m_Camera->Target = float3(0, 0, 0);
-
-	vector<float3> vertices{
-		float3(-1.0f, -1.0f, -1.0f),
-		float3(-1.0f,  1.0f, -1.0f),
-		float3(1.0f,  1.0f, -1.0f),
-		float3(1.0f, -1.0f, -1.0f),
-		float3(-1.0f, -1.0f,  1.0f),
-		float3(-1.0f,  1.0f,  1.0f),
-		float3(1.0f,  1.0f,  1.0f),
-		float3(1.0f, -1.0f,  1.0f)
-	};
-
-	vector<float3> colors{
-	float3(1.0f, 1.0f, 1.0f),
-	float3(0.0f, 0.0f, 1.0f),
-	float3(1.0f, 0.0f, 0.0f),
-	float3(0.0f, 1.0f, 0.0f),
-	float3(1.0f, 1.0f, 0.0f),
-	float3(1.0f, 0.0f, 1.0f),
-	float3(0.0f, 1.0f, 1.0f),
-	float3(0.5f, 0.5f, 0.5f),
-	};
-
-	vector<int> indices = {
-		// Front face.
-		0, 1, 2,
-		0, 2, 3,
-
-		// Back face.
-		4, 6, 5,
-		4, 7, 6,
-
-		// Left face.
- 		4, 5, 1,
- 		4, 1, 0,
-
-		// Right face.
-		3, 2, 6,
-		3, 6, 7,
-
-		// Top face.
-		1, 5, 6,
-		1, 6, 2,
-
-		// Bottom face.
-		4, 0, 3,
-		4, 3, 7,
-	};
-
-	Pipeline::Execute(m_Camera, vertices, indices, colors);
+	
+	for(auto mesh : meshes)
+	{
+		Pipeline::Execute(m_Camera, mesh);
+	}
 }
 
 void Engine::OnMouseMove(WPARAM btnState, int x, int y)
@@ -146,4 +114,9 @@ void Engine::OnMouseMove(WPARAM btnState, int x, int y)
 
 	m_LastMousePos.x = static_cast<float>(x);
 	m_LastMousePos.y = static_cast<float>(y);
+}
+
+void Engine::LoadModel()
+{
+	LoadGLTF("../SoftwareRenderer/Model/Cube/Cube.gltf", &meshes);
 }

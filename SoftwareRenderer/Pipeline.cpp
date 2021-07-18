@@ -4,10 +4,11 @@
 #include "Framework\RenderContext.h"
 #include <cmath>
 #include "Framework\RenderDevice.h"
+#include "Framework\Mesh.h"
 
 using namespace std;
 
-void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indices, vector<float3> colors)
+void Pipeline::Execute(Camera* camera, const Mesh& mesh)
 {
 	camera->BuildViewMatrix();
 	camera->BuildPerspectiveMatrix();
@@ -19,9 +20,9 @@ void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indi
 	auto vp = viewMat * projMat;
 
 	vector<float4> vertexArray;
-	for (auto vertex : vertices)
+	for (auto vertex : mesh.vertices)
 	{
-		auto point = float4(vertex, 1.0);
+		auto point = float4(vertex, 1.0) * mesh.pivotXform;
 		point = point * vp;
 
 		point = MathUtil::Homogenous(point);
@@ -31,18 +32,22 @@ void Pipeline::Execute(Camera* camera, vector<float3> vertices, vector<int> indi
 		vertexArray.push_back(point);
 	}
 
-	int indexLength = indices.size();
+	int indexLength = mesh.indices.size();
 	for (int index = 0; index < indexLength; index += 3)
 	{
-		auto v0 = vertexArray[indices[index + 0]];
-		auto v1 = vertexArray[indices[index + 1]];
-		auto v2 = vertexArray[indices[index + 2]];
+		auto v0 = vertexArray[mesh.indices[index + 0]];
+		auto v1 = vertexArray[mesh.indices[index + 1]];
+		auto v2 = vertexArray[mesh.indices[index + 2]];
 
-		auto color0 = colors[indices[index + 0]];
-		auto color1 = colors[indices[index + 1]];
-		auto color2 = colors[indices[index + 2]];
+		//auto color0 = colors[indices[index + 0]];
+		//auto color1 = colors[indices[index + 1]];
+		//auto color2 = colors[indices[index + 2]];
 
-		Rasterize(v0, v1, v2, color0, color1, color2);
+		//Rasterize(v0, v1, v2, color0, color1, color2);
+		DWORD color = (255 << 24) + (255 << 16) + (255 << 8) + 255;
+		RenderContext::DrawLine(v0.x, v0.y, v1.x, v1.y, color);
+		RenderContext::DrawLine(v0.x, v0.y, v2.x, v2.y, color);
+		RenderContext::DrawLine(v2.x, v2.y, v1.x, v1.y, color);
 	}
 }
 

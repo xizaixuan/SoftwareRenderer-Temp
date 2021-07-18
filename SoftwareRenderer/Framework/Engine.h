@@ -35,6 +35,8 @@ public:
 
 	void OnMouseMove(WPARAM btnState, int x, int y);
 
+	void LoadModel();
+
 private:
 	Camera* m_Camera;
 
