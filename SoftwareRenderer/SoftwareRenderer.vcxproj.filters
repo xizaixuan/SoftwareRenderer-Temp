@@ -90,6 +90,12 @@
     <ClInclude Include="GLTF\gltf-loader.h">
       <Filter>Header Files\GLTF</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Material.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Texture.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp">

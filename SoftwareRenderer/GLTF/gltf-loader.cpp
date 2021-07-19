@@ -5,6 +5,7 @@
 #include "../Framework/Mesh.h"
 #include "tiny_gltf.h"
 #include "../Mathematics/Float3.h"
+#include "../Framework/Texture.h"
 #define TINYGLTF_IMPLEMENTATION
 #define TINYGLTF_NO_STB_IMAGE_WRITE
 
@@ -18,7 +19,7 @@ static std::string GetFilePathExtension(const std::string &FileName)
 ///
 /// Loads glTF 2.0 mesh
 ///
-bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes)
+bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vector<Texture> *textures)
 {
     tinygltf::Model model;
     tinygltf::TinyGLTF loader;
@@ -389,6 +390,22 @@ bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes)
         meshes->push_back(loadedMesh);
         ret = true;
     }
+
+	// Iterate through all texture declaration in glTF file
+	for (const auto& gltfTexture : model.textures)
+    {
+		Texture loadedTexture;
+		const auto& image = model.images[gltfTexture.source];
+		loadedTexture.components = image.component;
+		loadedTexture.width = image.width;
+		loadedTexture.height = image.height;
+
+		const auto size =
+			image.component * image.width * image.height * sizeof(unsigned char);
+		loadedTexture.image = new unsigned char[size];
+		memcpy(loadedTexture.image, image.image.data(), size);
+		textures->push_back(loadedTexture);
+	}
     
     return ret;
 }

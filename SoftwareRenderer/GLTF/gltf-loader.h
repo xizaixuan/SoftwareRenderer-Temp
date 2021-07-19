@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "../Framework/Mesh.h"
+#include "../Framework/Texture.h"
 
 /// Adapts an array of bytes to an array of T. Will advace of byte_stride each
 /// elements.
@@ -161,6 +162,6 @@ struct v4dArray
   size_t size() const { return adapter.elemCount; }
 };
 
-bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes);
+bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vector<Texture>* textures);
 
 #endif

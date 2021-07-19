@@ -35,6 +35,7 @@ Engine::~Engine()
 }
 
 std::vector<Mesh> meshes;
+std::vector<Texture> textures;
 
 void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 {
@@ -118,5 +119,5 @@ void Engine::OnMouseMove(WPARAM btnState, int x, int y)
 
 void Engine::LoadModel()
 {
-	LoadGLTF("../SoftwareRenderer/Model/Cube/Cube.gltf", &meshes);
+	LoadGLTF("../SoftwareRenderer/Model/Cube/Cube.gltf", &meshes, &textures);
 }

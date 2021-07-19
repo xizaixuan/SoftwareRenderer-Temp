@@ -142,9 +142,11 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Framework\Engine.h" />
+    <ClInclude Include="Framework\Material.h" />
     <ClInclude Include="Framework\Mesh.h" />
     <ClInclude Include="Framework\RenderContext.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
+    <ClInclude Include="Framework\Texture.h" />
     <ClInclude Include="Framework\WinApp.h" />
     <ClInclude Include="GLTF\gltf-loader.h" />
     <ClInclude Include="GLTF\json.hpp" />
