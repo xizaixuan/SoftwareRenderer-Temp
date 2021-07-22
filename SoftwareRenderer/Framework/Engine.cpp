@@ -18,6 +18,7 @@
 #include "../GLTF/tiny_gltf.h"
 #include "Mesh.h"
 #include "../GLTF/gltf-loader.h"
+#include "Material.h"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ Engine::~Engine()
 
 std::vector<Mesh> meshes;
 std::vector<Texture> textures;
+std::vector<Material> materials;
 
 void Engine::Init(HINSTANCE hInstance, int nCmdShow, int width, int height)
 {
@@ -119,5 +121,5 @@ void Engine::OnMouseMove(WPARAM btnState, int x, int y)
 
 void Engine::LoadModel()
 {
-	LoadGLTF("../SoftwareRenderer/Model/Cube/Cube.gltf", &meshes, &textures);
+	LoadGLTF("../SoftwareRenderer/Model/Helmet/DamagedHelmet.gltf", &meshes, &textures, &materials);
 }

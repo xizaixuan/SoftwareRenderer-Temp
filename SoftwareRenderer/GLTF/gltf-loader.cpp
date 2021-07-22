@@ -19,7 +19,7 @@ static std::string GetFilePathExtension(const std::string &FileName)
 ///
 /// Loads glTF 2.0 mesh
 ///
-bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vector<Texture> *textures)
+bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vector<Texture> *textures, std::vector<Material> *materials)
 {
     tinygltf::Model model;
     tinygltf::TinyGLTF loader;
@@ -369,6 +369,8 @@ bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vecto
                 case TINYGLTF_MODE_LINE_LOOP:
                     break;
             }
+
+            loadedMesh.material_ids.push_back(meshPrimitive.material);
         }
 
         // bbox :
@@ -406,6 +408,13 @@ bool LoadGLTF(const std::string &filename, std::vector<Mesh> *meshes, std::vecto
 		memcpy(loadedTexture.image, image.image.data(), size);
 		textures->push_back(loadedTexture);
 	}
+
+    for (const auto& gltfMaterial : model.materials)
+    {
+        Material material;
+        material.baseColorTexture = gltfMaterial.pbrMetallicRoughness.baseColorTexture.index;
+        materials->push_back(material); 
+    }
     
     return ret;
 }
