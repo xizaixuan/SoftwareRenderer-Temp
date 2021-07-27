@@ -146,6 +146,7 @@
     <ClInclude Include="Framework\Mesh.h" />
     <ClInclude Include="Framework\RenderContext.h" />
     <ClInclude Include="Framework\RenderDevice.h" />
+    <ClInclude Include="Framework\Sampler2D.h" />
     <ClInclude Include="Framework\Texture.h" />
     <ClInclude Include="Framework\WinApp.h" />
     <ClInclude Include="GLTF\gltf-loader.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Framework\Main.cpp" />
     <ClCompile Include="Framework\RenderContext.cpp" />
     <ClCompile Include="Framework\RenderDevice.cpp" />
+    <ClCompile Include="Framework\Sampler2D.cpp" />
     <ClCompile Include="Framework\WinApp.cpp" />
     <ClCompile Include="GLTF\gltf-loader.cpp" />
     <ClCompile Include="Mathematics\Float2.cpp" />

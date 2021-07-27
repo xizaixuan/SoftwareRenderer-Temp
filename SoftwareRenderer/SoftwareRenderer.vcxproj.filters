@@ -96,6 +96,9 @@
     <ClInclude Include="Framework\Texture.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Sampler2D.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Engine.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="GLTF\gltf-loader.cpp">
       <Filter>Source Files\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Sampler2D.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
