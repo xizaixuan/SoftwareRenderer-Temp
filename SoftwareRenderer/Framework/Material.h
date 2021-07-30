@@ -3,8 +3,9 @@
 
 #include <cstdlib>
 
-struct Material
+class Material
 {
+public:
 	int baseColorTexture;
 
 	Material()

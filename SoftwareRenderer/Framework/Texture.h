@@ -3,8 +3,9 @@
 
 #include <cstdlib>
 
-struct Texture
+class Texture
 {
+public:
     int width;
     int height;
 	int components;

@@ -6,8 +6,12 @@
 #include "tiny_gltf.h"
 #include "../Mathematics/Float3.h"
 #include "../Framework/Texture.h"
+
 #define TINYGLTF_IMPLEMENTATION
-#define TINYGLTF_NO_STB_IMAGE_WRITE
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define TINYGLTF_NOEXCEPTION
+#define JSON_NOEXCEPTION
 
 static std::string GetFilePathExtension(const std::string &FileName)
 {

@@ -2,13 +2,14 @@
 #define SAMPLER2D_H_
 
 #include <cstdlib>
+#include <windows.h>
 
 class Texture;
 
 struct Sampler2D
 {
 public:
-	int Sample(const Texture& texture, float u, float v);
+	DWORD Sample(const Texture& texture, float u, float v);
 
 public:
 	int minFilter;

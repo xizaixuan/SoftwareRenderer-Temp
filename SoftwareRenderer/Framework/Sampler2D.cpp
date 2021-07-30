@@ -1,18 +1,16 @@
 #include "Sampler2D.h"
 #include "Texture.h"
 
-int Sampler2D::Sample(const Texture& texture, float u, float v)
+DWORD Sampler2D::Sample(const Texture& texture, float u, float v)
 {
-	int w = texture.width - 1;
-	int h = texture.height - 1;
+	int tx = u * texture.width;
+	int ty = v * texture.height;
+	int idx_offset = (ty * texture.width + tx) * texture.components;
+	int r = texture.image[idx_offset + 0];
+	int g = texture.image[idx_offset + 1];
+	int b = texture.image[idx_offset + 2];
 
-	int offset = (texture.width * h * v + u * w) * texture.components;
-
-	int r = texture.image[offset + 0];
-	int g = texture.image[offset + 1];
-	int b = texture.image[offset + 2];
-
-	int color = (255 << 24) + ((r * 255) << 16) + ((b * 255) << 8) + (b * 255);
+	DWORD color = (b << 16) + (g << 8) + b;
 
 	return color;
 }

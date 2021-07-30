@@ -19,6 +19,7 @@
 #include "Mesh.h"
 #include "../GLTF/gltf-loader.h"
 #include "Material.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -84,7 +85,7 @@ void Engine::RenderScene()
 	
 	for(auto mesh : meshes)
 	{
-		Pipeline::Execute(m_Camera, mesh);
+		Pipeline::Execute(m_Camera, mesh, textures, materials);
 	}
 }
 
@@ -121,5 +122,5 @@ void Engine::OnMouseMove(WPARAM btnState, int x, int y)
 
 void Engine::LoadModel()
 {
-	LoadGLTF("../SoftwareRenderer/Model/Helmet/DamagedHelmet.gltf", &meshes, &textures, &materials);
+	LoadGLTF("../SoftwareRenderer/Model/Cube/Cube.gltf", &meshes, &textures, &materials);
 }
