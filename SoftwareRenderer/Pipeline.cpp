@@ -109,7 +109,7 @@ void Pipeline::Rasterize(tuple<float4, float2> v0, tuple<float4, float2> v1, tup
 			{
 				w0 /= area;
 				w1 /= area;
-				w2 /= area;
+				w2 = 1 - w0 - w1;
 
 				//////////////////////////////////////////////////////////////////////////
 				// color
@@ -117,29 +117,29 @@ void Pipeline::Rasterize(tuple<float4, float2> v0, tuple<float4, float2> v1, tup
 // 
 // 				DWORD color = (255 << 24) + ((int)(newColor.x * 255) << 16) + ((int)(newColor.y * 255) << 8) + (int)(newColor.z * 255);
 
-
+				
 				//////////////////////////////////////////////////////////////////////////
 				// UV
 				float2 uv = uv0 * w0 + uv1 * w1 + uv2 * w2;
 
-				if (uv.x < 0)
+				while (uv.x < 0)
 				{
-					uv.x = 0;
+					uv.x += 1;
 				}
 
-				if (uv.x > 1)
+				while (uv.x > 1)
 				{
-					uv.x = 1;
+					uv.x -= 1;
 				}
 
-				if (uv.y < 0)
+				while (uv.y < 0)
 				{
-					uv.y = 0;
+					uv.y += 1;
 				}
 
-				if (uv.y > 1)
+				while (uv.y > 1)
 				{
-					uv.y = 1;
+					uv.y -= 1;
 				}
 
 				auto color = sampler.Sample(texture, uv.x, uv.y);
